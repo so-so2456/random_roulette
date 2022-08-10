@@ -1,0 +1,89 @@
+const number = document.getElementById("initial__number_modifier__number");
+const canvas = document.getElementById("initial__roulette");
+const option = document.getElementById("initial__option");
+
+let n = parseInt(number.value);
+
+
+function modifyOption(n) {
+    while (option.firstChild) {
+        option.removeChild(option.firstChild);
+    }
+    for (let i = 0; i < n; i++) {
+        const input = document.createElement("input");
+        input.setAttribute("value", i + 1);
+        option.appendChild(input);
+    }
+}
+
+function extractOptionValue() {
+    const nodes = option.childNodes;
+    let texts = [];
+    nodes.forEach((e) => {
+        texts.push(e.value);
+    })
+    return texts;
+}
+
+function draw(canvas, n) {
+    const ctx = canvas.getContext('2d');
+    const geom = {
+        x: 100,
+        y: 100,
+        radius: 100,
+        statrAngle: 0,
+        endAngle: Math.PI * 2,
+        anticlockwise: false
+    }
+    const colors = ['#93DAFF', '#00BFFF', '#1E90FF', '#96A5FF', '#6495ED', '#0064CD', '#5A5AFF', '#7B68EE', '#483D8B', '#6A5ACD']
+    const texts = extractOptionValue();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawRoulette(ctx, n, geom, colors, texts);
+}
+
+function drawRoulette(ctx, n, geom, colors, texts) {
+    const eachAngle = Math.PI * 2 / n;
+    const textAngle = eachAngle / 2;
+    for (let i = 0; i <= n; i++) {
+        ctx.beginPath();
+        ctx.arc(geom.x, geom.y, geom.radius, i * eachAngle, i * eachAngle + eachAngle, geom.anticlockwise);
+        ctx.lineTo(geom.x, geom.y);
+        ctx.closePath();
+        ctx.fillStyle = colors[i - 1];
+        //ctx.fillText('Hello', geom.x + (50 * Math.cos(i * eachAngle + textAngle)), geom.y + (50 * Math.sin(i * eachAngle + textAngle)));
+        ctx.fill();
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.fillText(texts[i - 1], geom.x + (geom.radius * 6 / 10 * Math.cos(i * eachAngle + textAngle)), geom.y + (geom.radius * 6 / 10 * Math.sin(i * eachAngle + textAngle)));
+        ctx.stroke();
+    }
+}
+
+function plusNumber() {
+    if (n >= 10) return;
+    n = n + 1
+    number.value = n;
+    modifyOption(n);
+    draw(canvas, n);
+}
+
+function minusNumber() {
+    if (n <= 2) return;
+    n = n - 1
+    number.value = n;
+    modifyOption(n);
+    draw(canvas, n);
+}
+
+function changeNumber() {
+    n = number.value;
+    modifyOption(n);
+    draw(canvas, n);
+}
+
+function init() {
+    modifyOption(n);
+    draw(canvas, n);
+}
+
+init();

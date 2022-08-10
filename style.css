@@ -1,0 +1,40 @@
+body {
+    background-color: #202b38;
+    color: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#initial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#initial__roulette {
+    margin: 1rem 0;
+}
+
+#initial__number_modifier__number {
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+}
+
+#initial__number_modifier button {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#initial__option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#initial__option input {
+    margin: 0.25rem;
+}

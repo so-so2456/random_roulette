@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>All About Me</title>
+    <title>RANDOM ROULETTE</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-  </body>
+</head>
+
+<body>
+    <h1>Go Go</h1>
+    <div id="initial">
+        <pre>원하는 판의 개수를 정해주세요!</pre>
+        <div id="initial__number_modifier">
+            <button id="initial__number_modifier__plus" onclick="plusNumber()">+</button>
+            <input id="initial__number_modifier__number" value="2" oninput="changeNumber()" />
+            <button id="initial__number_modifier__minus" onclick="minusNumber()">-</button>
+        </div>
+        <canvas id="initial__roulette" width=200 height="200"></canvas>
+
+        <pre>옵션을 적고 버튼을 눌러주세요!</pre>
+        <div id="initial__option"></div>
+        <button id="initial__finish" onclick="draw()">Go!</button>
+    </div>
+    <script src="script.js"></script>
+</body>
 
 </html>
