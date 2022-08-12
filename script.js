@@ -116,8 +116,10 @@ function minusNumber() {
 
 function changeNumber() {
     n = number.value;
-    modifyOption(n);
-    draw(initialCanvas, n);
+    if (n >= 2 && n <= 10) {
+        modifyOption(n);
+        draw(initialCanvas, n);
+    }
 }
 
 function init() {
