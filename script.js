@@ -1,9 +1,38 @@
 const number = document.getElementById("initial__number_modifier__number");
-const canvas = document.getElementById("initial__roulette");
+const initialCanvas = document.getElementById("initial__roulette");
 const option = document.getElementById("initial__option");
+const srcBtn = document.getElementById("initial__finish");
+
+const resultCanvas = document.getElementById("rolling__roulette");
+const screen = document.getElementById("rolling");
+const rollBtn = document.getElementById("rolling__roll");
+const closeBtn = document.getElementById("rolling__close");
 
 let n = parseInt(number.value);
 
+function setRandomAngle() {
+    const rn = 36000 + 3600 * Math.random();
+    document.documentElement.style.setProperty("--rotating-angle", `${rn}deg`);
+}
+
+srcBtn.onclick = () => {
+    draw(resultCanvas, n);
+    screen.style.visibility = "visible";
+    document.querySelector("body").style.backgroundColor = "rgba(32, 43, 56, 0.8)";
+}
+
+rollBtn.onclick = () => {
+    setRandomAngle();
+    resultCanvas.classList.remove("roll");
+    void resultCanvas.offsetWidth;
+    resultCanvas.classList.add("roll");
+}
+
+closeBtn.onclick = () => {
+    resultCanvas.classList.remove("roll");
+    screen.style.visibility = "hidden";
+    document.querySelector("body").style.backgroundColor = "rgb(32, 43, 56)";
+}
 
 function modifyOption(n) {
     while (option.firstChild) {
@@ -28,17 +57,27 @@ function extractOptionValue() {
 function draw(canvas, n) {
     const ctx = canvas.getContext('2d');
     const geom = {
-        x: 100,
-        y: 100,
-        radius: 100,
-        statrAngle: 0,
-        endAngle: Math.PI * 2,
-        anticlockwise: false
-    }
+        "initial": {
+            x: 100,
+            y: 100,
+            radius: 100,
+            statrAngle: 0,
+            endAngle: Math.PI * 2,
+            anticlockwise: false
+        },
+        "rolling": {
+            x: 150,
+            y: 150,
+            radius: 150,
+            statrAngle: 0,
+            endAngle: Math.PI * 2,
+            anticlockwise: false
+        }
+    };
     const colors = ['#93DAFF', '#00BFFF', '#1E90FF', '#96A5FF', '#6495ED', '#0064CD', '#5A5AFF', '#7B68EE', '#483D8B', '#6A5ACD']
     const texts = extractOptionValue();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawRoulette(ctx, n, geom, colors, texts);
+    drawRoulette(ctx, n, geom[canvas.parentNode.id], colors, texts);
 }
 
 function drawRoulette(ctx, n, geom, colors, texts) {
@@ -64,7 +103,7 @@ function plusNumber() {
     n = n + 1
     number.value = n;
     modifyOption(n);
-    draw(canvas, n);
+    draw(initialCanvas, n);
 }
 
 function minusNumber() {
@@ -72,18 +111,18 @@ function minusNumber() {
     n = n - 1
     number.value = n;
     modifyOption(n);
-    draw(canvas, n);
+    draw(initialCanvas, n);
 }
 
 function changeNumber() {
     n = number.value;
     modifyOption(n);
-    draw(canvas, n);
+    draw(initialCanvas, n);
 }
 
 function init() {
     modifyOption(n);
-    draw(canvas, n);
+    draw(initialCanvas, n);
 }
 
 init();

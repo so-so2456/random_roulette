@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>Go Go</h1>
+    <h1>Random Roulette</h1>
     <div id="initial">
         <pre>원하는 판의 개수를 정해주세요!</pre>
         <div id="initial__number_modifier">
@@ -22,7 +22,14 @@
 
         <pre>옵션을 적고 버튼을 눌러주세요!</pre>
         <div id="initial__option"></div>
-        <button id="initial__finish" onclick="draw()">Go!</button>
+        <button id="initial__finish">Go!</button>
+    </div>
+    <div id="rolling" style="visibility: hidden">
+        <h1>Go Go!</h1>
+        <div>V</div>
+        <canvas id="rolling__roulette" width=300 height="300" margin-bottom="2rem"></canvas>
+        <button id="rolling__roll">돌리기</button>
+        <button id="rolling__close">창닫기</button>
     </div>
     <script src="script.js"></script>
 </body>

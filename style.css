@@ -1,4 +1,10 @@
+:root {
+    --rotating-angle: 36000deg;
+}
+
 body {
+    width: 100vw;
+    height: 100vh;
     background-color: #202b38;
     color: #dbdbdb;
     display: flex;
@@ -37,4 +43,45 @@ body {
 }
 #initial__option input {
     margin: 0.25rem;
+}
+
+#rolling {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: 60vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202b38;
+    border-radius: 10px;
+}
+
+#rolling button {
+    margin: 0.25rem;
+}
+
+.roll_init {
+    transform: rotate(0deg);
+}
+
+#rolling__roulette {
+    margin: 10px 0 5rem 0;
+}
+
+.roll {
+    animation: roll 3s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes roll {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(var(--rotating-angle));
+    }
 }
